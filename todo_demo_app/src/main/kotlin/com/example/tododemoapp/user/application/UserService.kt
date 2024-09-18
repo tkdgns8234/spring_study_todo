@@ -15,7 +15,7 @@ import org.springframework.web.client.HttpClientErrorException.Conflict
 class UserService(private val userJpaRepository: UserJpaRepository) {
     fun findAll(): List<User> = userJpaRepository.findAll()
 
-    fun findById(id: Long): User?  {
+    fun findById(id: Long): User  {
         return userJpaRepository.findById(id)
             .orElseThrow { NotFoundException() }
     }

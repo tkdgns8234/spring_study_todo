@@ -6,7 +6,7 @@ import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
 import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
 import com.example.tododemoapp.todo.domain.Todo
 import com.example.tododemoapp.todo.domain.TodoJpaRepository
-import com.example.tododemoapp.user.domain.UserJpaRepository
+import com.example.tododemoapp.user.application.UserService
 import jakarta.transaction.Transactional
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 @Service
 class TodoService(
     private val todoJpaRepository: TodoJpaRepository,
-    private val userJpaRepository: UserJpaRepository,
+    private val userService: UserService
 ) {
     fun findByTodoId(todoId: Long): Todo {
         return todoJpaRepository.findById(todoId)
@@ -22,28 +22,23 @@ class TodoService(
     }
 
     fun findByUserId(userId: Long): List<Todo> {
-        val user = userJpaRepository.findById(userId)
-            .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
+        val user = userService.findById(userId)
 
         return todoJpaRepository.findByUser(user)
     }
 
     @Transactional
     fun create(dto: CreateTodoDTO): Todo {
-        val user = userJpaRepository.findById(dto.userId)
-            .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
-
+        val user = userService.findById(dto.userId)
         val todoEntity = dto.toEntity(user)
+
         return todoJpaRepository.save(todoEntity)
     }
 
     @Transactional
     fun update(dto: UpdateTodoDTO): Todo {
-        val user = userJpaRepository.findById(dto.userId)
-            .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
-
-        val todo = todoJpaRepository.findById(dto.todoId)
-            .orElseThrow { CustomException(ErrorCode.TODO_NOT_FOUND) }
+        val user = userService.findById(dto.userId)
+        val todo = this.findByTodoId(dto.todoId)
 
         if (user.id != todo.user.id) {
             throw CustomException(ErrorCode.ACCESS_DENIED)
@@ -59,11 +54,8 @@ class TodoService(
 
     @Transactional
     fun delete(todoId: Long, userId: Long) {
-        val user = userJpaRepository.findById(userId)
-            .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
-
-        val todo = todoJpaRepository.findById(todoId)
-            .orElseThrow { CustomException(ErrorCode.TODO_NOT_FOUND) }
+        val user = userService.findById(userId)
+        val todo = this.findByTodoId(todoId)
 
         if (user.id != todo.user.id) {
             throw CustomException(ErrorCode.ACCESS_DENIED)
