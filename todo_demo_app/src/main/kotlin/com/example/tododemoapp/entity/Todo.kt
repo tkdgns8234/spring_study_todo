@@ -1,4 +1,4 @@
-package com.example.todo_demo_app.entity
+package com.example.tododemoapp.entity
 
 import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*

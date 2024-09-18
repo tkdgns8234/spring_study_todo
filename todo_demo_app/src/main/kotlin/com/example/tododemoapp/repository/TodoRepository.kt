@@ -1,7 +1,7 @@
-package com.example.todo_demo_app.repository
+package com.example.tododemoapp.repository
 
-import com.example.todo_demo_app.entity.Todo
-import com.example.todo_demo_app.entity.User
+import com.example.tododemoapp.entity.Todo
+import com.example.tododemoapp.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface TodoRepository: JpaRepository<Todo, Long> {

@@ -1,7 +1,7 @@
-package com.example.todo_demo_app.controller
+package com.example.tododemoapp.controller
 
-import com.example.todo_demo_app.entity.User
-import com.example.todo_demo_app.service.UserService
+import com.example.tododemoapp.entity.User
+import com.example.tododemoapp.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping

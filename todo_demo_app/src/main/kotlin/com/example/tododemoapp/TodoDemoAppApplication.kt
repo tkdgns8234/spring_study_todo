@@ -1,4 +1,4 @@
-package com.example.todo_demo_app
+package com.example.tododemoapp
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

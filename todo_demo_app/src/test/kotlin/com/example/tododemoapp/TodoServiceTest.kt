@@ -1,10 +1,10 @@
-package com.example.todo_demo_app
+package com.example.tododemoapp
 
-import com.example.todo_demo_app.entity.Todo
-import com.example.todo_demo_app.entity.User
-import com.example.todo_demo_app.repository.TodoRepository
-import com.example.todo_demo_app.repository.UserRepository
-import com.example.todo_demo_app.service.TodoService
+import com.example.tododemoapp.entity.Todo
+import com.example.tododemoapp.entity.User
+import com.example.tododemoapp.repository.TodoRepository
+import com.example.tododemoapp.repository.UserRepository
+import com.example.tododemoapp.service.TodoService
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
