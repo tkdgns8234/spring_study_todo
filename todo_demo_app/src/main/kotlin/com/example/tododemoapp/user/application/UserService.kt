@@ -4,6 +4,7 @@ import com.example.tododemoapp.common.presentation.exception.CustomException
 import com.example.tododemoapp.common.presentation.exception.ErrorCode
 import com.example.tododemoapp.user.domain.User
 import com.example.tododemoapp.user.domain.UserJpaRepository
+import jakarta.transaction.Transactional
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -21,6 +22,7 @@ class UserService(private val userJpaRepository: UserJpaRepository) {
 
     fun findByEmail(email: String): User? = userJpaRepository.findByEmail(email)
 
+    @Transactional
     fun save(user: User): User {
         // Email 중복 체크
         if (findByEmail(user.email) != null) {
@@ -30,6 +32,7 @@ class UserService(private val userJpaRepository: UserJpaRepository) {
         return userJpaRepository.save(user)
     }
 
+    @Transactional
     fun deleteById(id: Long) {
         if (findById(id) == null) {
             throw NotFoundException()

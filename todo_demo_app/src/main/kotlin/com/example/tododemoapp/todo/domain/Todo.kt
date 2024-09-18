@@ -24,10 +24,4 @@ data class Todo (
     @JoinColumn(name = "user_id")
     @JsonBackReference
     val user: User
-) {
-    fun updateFromDTO(dto: UpdateTodoDTO) {
-        this.title = dto.title
-        this.description = dto.description
-        this.completed = dto.completed
-    }
-}
+)

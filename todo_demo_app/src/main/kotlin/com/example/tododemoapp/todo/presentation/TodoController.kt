@@ -2,9 +2,7 @@ package com.example.tododemoapp.todo.presentation
 
 import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
 import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
-import com.example.tododemoapp.todo.domain.Todo
 import com.example.tododemoapp.todo.application.TodoService
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

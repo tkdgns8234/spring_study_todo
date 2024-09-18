@@ -7,6 +7,7 @@ import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
 import com.example.tododemoapp.todo.domain.Todo
 import com.example.tododemoapp.todo.domain.TodoJpaRepository
 import com.example.tododemoapp.user.domain.UserJpaRepository
+import jakarta.transaction.Transactional
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 
@@ -27,6 +28,7 @@ class TodoService(
         return todoJpaRepository.findByUser(user)
     }
 
+    @Transactional
     fun create(dto: CreateTodoDTO): Todo {
         val user = userJpaRepository.findById(dto.userId)
             .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
@@ -35,6 +37,7 @@ class TodoService(
         return todoJpaRepository.save(todoEntity)
     }
 
+    @Transactional
     fun update(dto: UpdateTodoDTO): Todo {
         val user = userJpaRepository.findById(dto.userId)
             .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
@@ -46,10 +49,15 @@ class TodoService(
             throw CustomException(ErrorCode.ACCESS_DENIED)
         }
 
-        todo.updateFromDTO(dto)
+        // update
+        todo.title = dto.title
+        todo.description = dto.description
+        todo.completed = dto.completed
+
         return todoJpaRepository.save(todo)
     }
 
+    @Transactional
     fun delete(todoId: Long, userId: Long) {
         val user = userJpaRepository.findById(userId)
             .orElseThrow { CustomException(ErrorCode.USER_NOT_FOUND) }
