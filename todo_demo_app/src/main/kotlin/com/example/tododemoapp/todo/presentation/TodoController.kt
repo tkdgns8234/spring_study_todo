@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+// TODO: user 정보 파라미터로 전달받는것이 아니라 token or session 방식으로 처리
 @RestController
 @RequestMapping("/todos")
 class TodoController(
@@ -15,57 +16,20 @@ class TodoController(
 ) {
 
     @GetMapping("/{id}")
-    fun getTodoById(@PathVariable id: Long): ResponseEntity<Todo> {
-        val todo = todoService.findByTodoId(id)
-        return if (todo == null) {
-            ResponseEntity.notFound().build()
-        } else {
-            ResponseEntity.ok(todo)
-        }
-    }
+    fun getTodoById(@PathVariable id: Long) = todoService.findByTodoId(id)
 
-    // TODO: user 정보 파라미터로 전달받는것이 아니라 token or session 방식
     @GetMapping
-    fun getAllTodosByUserId(@RequestParam userId: Long): ResponseEntity<List<Todo>> {
-        return try {
-            val todos = todoService.findByUserId(userId)
-            ResponseEntity.ok(todos)
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        }
-    }
+    fun getAllTodosByUserId(@RequestParam userId: Long) = todoService.findByUserId(userId)
 
     @PostMapping
-    fun createTodo(@RequestBody dto: CreateTodoDTO): ResponseEntity<Todo> {
-        return try {
-            val todo = todoService.create(dto)
-            ResponseEntity.ok(todo)
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        }
-    }
+    fun createTodo(@RequestBody dto: CreateTodoDTO) = todoService.create(dto)
 
     @PutMapping
-    fun updateTodo(@RequestBody dto: UpdateTodoDTO): ResponseEntity<Todo> {
-        return try {
-            val todo = todoService.update(dto)
-            ResponseEntity.ok(todo)
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        } catch (e: IllegalAccessException) {
-            ResponseEntity(HttpStatus.FORBIDDEN)
-        }
-    }
+    fun updateTodo(@RequestBody dto: UpdateTodoDTO) = todoService.update(dto)
 
     @DeleteMapping("/{id}")
     fun deleteTodo(@PathVariable id: Long, @RequestParam userId: Long): ResponseEntity<Void> {
-        return try {
-            todoService.delete(todoId = id, userId = userId)
-            ResponseEntity.noContent().build()
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        } catch (e: IllegalAccessException) {
-            ResponseEntity(HttpStatus.FORBIDDEN)
-        }
+        todoService.delete(todoId = id, userId = userId)
+        return ResponseEntity.noContent().build()
     }
 }
