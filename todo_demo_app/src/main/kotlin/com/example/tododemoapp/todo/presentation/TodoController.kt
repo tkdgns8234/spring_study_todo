@@ -1,9 +1,9 @@
-package com.example.tododemoapp.controller
+package com.example.tododemoapp.todo.presentation
 
-import com.example.tododemoapp.dto.CreateTodoDTO
-import com.example.tododemoapp.dto.UpdateTodoDTO
-import com.example.tododemoapp.entity.Todo
-import com.example.tododemoapp.service.TodoService
+import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
+import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
+import com.example.tododemoapp.todo.domain.Todo
+import com.example.tododemoapp.todo.application.TodoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

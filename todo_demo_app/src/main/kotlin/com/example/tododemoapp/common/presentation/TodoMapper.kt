@@ -1,9 +1,9 @@
-package com.example.tododemoapp.common
+package com.example.tododemoapp.common.presentation
 
-import com.example.tododemoapp.dto.CreateTodoDTO
-import com.example.tododemoapp.dto.UpdateTodoDTO
-import com.example.tododemoapp.entity.Todo
-import com.example.tododemoapp.entity.User
+import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
+import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
+import com.example.tododemoapp.todo.domain.Todo
+import com.example.tododemoapp.user.domain.User
 
 fun CreateTodoDTO.toEntity(user: User): Todo {
     return Todo(

@@ -1,5 +1,6 @@
-package com.example.tododemoapp.entity
+package com.example.tododemoapp.todo.domain
 
+import com.example.tododemoapp.user.domain.User
 import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 

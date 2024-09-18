@@ -1,6 +1,8 @@
-package com.example.tododemoapp.dto
+package com.example.tododemoapp.todo.presentation.dto
 
-data class CreateTodoDTO(
+data class UpdateTodoDTO(
+    val todoId: Long,
+
     var title: String,
 
     var description: String? = null,

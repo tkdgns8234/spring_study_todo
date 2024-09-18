@@ -1,7 +1,7 @@
-package com.example.tododemoapp.service
+package com.example.tododemoapp.user.application
 
-import com.example.tododemoapp.entity.User
-import com.example.tododemoapp.repository.UserRepository
+import com.example.tododemoapp.user.domain.User
+import com.example.tododemoapp.user.infra.UserRepository
 import org.springframework.stereotype.Service
 
 @Service

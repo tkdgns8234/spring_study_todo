@@ -1,5 +1,6 @@
-package com.example.tododemoapp.entity
+package com.example.tododemoapp.user.domain
 
+import com.example.tododemoapp.todo.domain.Todo
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import org.hibernate.annotations.BatchSize

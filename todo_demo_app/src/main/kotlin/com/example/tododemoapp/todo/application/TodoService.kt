@@ -1,11 +1,11 @@
-package com.example.tododemoapp.service
+package com.example.tododemoapp.todo.application
 
-import com.example.tododemoapp.common.toEntity
-import com.example.tododemoapp.dto.CreateTodoDTO
-import com.example.tododemoapp.dto.UpdateTodoDTO
-import com.example.tododemoapp.entity.Todo
-import com.example.tododemoapp.repository.TodoRepository
-import com.example.tododemoapp.repository.UserRepository
+import com.example.tododemoapp.common.presentation.toEntity
+import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
+import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
+import com.example.tododemoapp.todo.domain.Todo
+import com.example.tododemoapp.todo.infra.TodoRepository
+import com.example.tododemoapp.user.infra.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
