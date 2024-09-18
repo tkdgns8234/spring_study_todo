@@ -2,8 +2,8 @@ package com.example.tododemoapp
 
 import com.example.tododemoapp.todo.domain.Todo
 import com.example.tododemoapp.user.domain.User
-import com.example.tododemoapp.todo.infra.TodoRepository
-import com.example.tododemoapp.user.infra.UserRepository
+import com.example.tododemoapp.todo.domain.TodoJpaRepository
+import com.example.tododemoapp.user.domain.UserJpaRepository
 import com.example.tododemoapp.todo.application.TodoService
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -17,9 +17,9 @@ import java.util.*
  * **/
 
 class TodoServiceTest : StringSpec({
-    val todoRepository = mockk<TodoRepository>()
-    val userRepository = mockk<UserRepository>()
-    val todoService = TodoService(todoRepository, userRepository)
+    val todoRepository = mockk<TodoJpaRepository>()
+    val userJpaRepository = mockk<UserJpaRepository>()
+    val todoService = TodoService(todoRepository, userJpaRepository)
 
     "TODO ID로 TODO 단건 조회" {
         val user = User(id = 1L, name = "정상훈", email = "tkdgns8234@nate.com", password = "top secret")
@@ -40,12 +40,12 @@ class TodoServiceTest : StringSpec({
             Todo(id = 2L, title = "dog dog", description = "2222", completed = true, user = user)
         )
 
-        every { userRepository.findById(user.id) } returns Optional.of(user)
+        every { userJpaRepository.findById(user.id) } returns Optional.of(user)
         every { todoRepository.findByUser(user) } returns todos
 
         todoService.findByUserId(user.id) shouldBe todos
 
-        verify(exactly = 1) { userRepository.findById(user.id) }
+        verify(exactly = 1) { userJpaRepository.findById(user.id) }
         verify(exactly = 1) { todoRepository.findByUser(user) }
     }
 
@@ -53,7 +53,7 @@ class TodoServiceTest : StringSpec({
         val user = User(id = 1L, name = "정상훈", email = "tkdgns8234@nate.com", password = "top secret")
         val todo = Todo(id = 1L, title = "cat cat", description = "1111", completed = true, user = user)
 
-        every { userRepository.findById(todo.user.id) } returns Optional.of(user)
+        every { userJpaRepository.findById(todo.user.id) } returns Optional.of(user)
         every { todoRepository.save(todo) } returns todo
 
         todoService.create(todo) shouldBe todo
@@ -65,7 +65,7 @@ class TodoServiceTest : StringSpec({
         val user = User(id = 1L, name = "정상훈", email = "tkdgns8234@nate.com", password = "top secret")
         val todo = Todo(id = 1L, title = "cat cat", description = "1111", completed = true, user = user)
 
-        every { userRepository.findById(user.id) } returns Optional.of(user)
+        every { userJpaRepository.findById(user.id) } returns Optional.of(user)
         every { todoRepository.findById(todo.id) } returns Optional.of(todo)
         every { todoRepository.deleteById(todo.id) } returns Unit
 
