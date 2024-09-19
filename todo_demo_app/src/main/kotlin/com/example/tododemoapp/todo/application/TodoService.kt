@@ -44,11 +44,10 @@ class TodoService(
             throw CustomException(ErrorCode.ACCESS_DENIED)
         }
 
-        // update
-        todo.title = dto.title
-        todo.description = dto.description
-        todo.completed = dto.completed
+        // update 및 event 발행
+        todo.update(dto.title, dto.description, dto.completed)
 
+        // save 작업 commit 이후 이벤트 발생
         return todoJpaRepository.save(todo)
     }
 
