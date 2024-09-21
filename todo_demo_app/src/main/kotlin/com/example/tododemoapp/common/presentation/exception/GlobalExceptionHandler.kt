@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
  * @RestContoller 예외 발생 시, 공통 처리
  *
  * Spring 에서 지원하는 예외클래스는 별도 처리하지 않아도 됨
- * e.g) NotFoundException 발생한 경우 자동으로 return 코드 404 반환
  **/
 @RestControllerAdvice
 class GlobalExceptionHandler {

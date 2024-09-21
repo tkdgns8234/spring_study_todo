@@ -53,4 +53,8 @@ data class Todo (
 
         registerEvent(TodoUpdateEvent(this))
     }
+
+    override fun toString(): String {
+        return "($title, $description, $completed, $updateDate, $regDate)"
+    }
 }

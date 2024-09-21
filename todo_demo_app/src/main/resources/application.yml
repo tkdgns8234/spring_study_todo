@@ -1,8 +1,8 @@
 spring:
   application:
-    name: day2
+    name: todo
   profiles:
-    active: h2
+    active: postgres
 
 logging:
   level:

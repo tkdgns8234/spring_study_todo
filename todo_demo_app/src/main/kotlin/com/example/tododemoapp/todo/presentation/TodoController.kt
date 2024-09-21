@@ -3,7 +3,6 @@ package com.example.tododemoapp.todo.presentation
 import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
 import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
 import com.example.tododemoapp.todo.application.TodoService
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 // TODO: user 정보 파라미터로 전달받는것이 아니라 token or session 방식으로 처리
@@ -26,8 +25,7 @@ class TodoController(
     fun updateTodo(@RequestBody dto: UpdateTodoDTO) = todoService.update(dto)
 
     @DeleteMapping("/{id}")
-    fun deleteTodo(@PathVariable id: Long, @RequestParam userId: Long): ResponseEntity<Void> {
+    fun deleteTodo(@PathVariable id: Long, @RequestParam userId: Long) {
         todoService.delete(todoId = id, userId = userId)
-        return ResponseEntity.noContent().build()
     }
 }

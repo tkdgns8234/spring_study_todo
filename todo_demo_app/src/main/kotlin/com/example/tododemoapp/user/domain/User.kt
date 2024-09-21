@@ -29,4 +29,8 @@ data class User(
     @OneToMany(mappedBy = "user")
     @BatchSize(size = 10)
     val todos: List<Todo> = mutableListOf()
-)
+) {
+    override fun toString(): String {
+        return "($id,  $name, $email, $password)"
+    }
+}

@@ -6,9 +6,9 @@ import com.example.tododemoapp.todo.presentation.dto.CreateTodoDTO
 import com.example.tododemoapp.todo.presentation.dto.UpdateTodoDTO
 import com.example.tododemoapp.todo.domain.Todo
 import com.example.tododemoapp.todo.domain.TodoJpaRepository
+import com.example.tododemoapp.todo.presentation.mapper.toEntity
 import com.example.tododemoapp.user.application.UserService
 import jakarta.transaction.Transactional
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,7 +18,7 @@ class TodoService(
 ) {
     fun findByTodoId(todoId: Long): Todo {
         return todoJpaRepository.findById(todoId)
-            .orElseThrow { NotFoundException() }
+            .orElseThrow { CustomException(ErrorCode.TODO_NOT_FOUND) }
     }
 
     fun findByUserId(userId: Long): List<Todo> {

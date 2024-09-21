@@ -2,6 +2,7 @@ package com.example.tododemoapp.user.presentation
 
 import com.example.tododemoapp.user.domain.User
 import com.example.tododemoapp.user.application.UserService
+import com.example.tododemoapp.user.presentation.dto.UserCreateDTO
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -21,7 +22,7 @@ class UserController(private val userService: UserService) {
     fun getUserById(@PathVariable id: Long) = userService.findById(id)
 
     @PostMapping
-    fun createUser(@RequestBody user: User) = userService.save(user)
+    fun createUser(@RequestBody dto: UserCreateDTO) = userService.save(dto)
 
     @DeleteMapping("/{id}")
     fun deleteUser(@PathVariable id: Long) = userService.deleteById(id)
