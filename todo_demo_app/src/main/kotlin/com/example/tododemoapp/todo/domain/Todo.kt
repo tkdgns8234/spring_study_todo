@@ -4,6 +4,8 @@ import com.example.tododemoapp.user.domain.User
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import jakarta.persistence.*
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.domain.AbstractAggregateRoot
 import java.time.LocalDateTime
 
@@ -29,12 +31,11 @@ data class Todo (
     @Column(nullable = false)
     var completed: Boolean = false,
 
-    /** 수정 일시 */
     @Column(nullable = false)
+    @CreatedDate
     var updateDate: LocalDateTime = LocalDateTime.now(),
 
-    /** 등록 일시 */
-    @Column(nullable = false)
+    @LastModifiedDate
     var regDate: LocalDateTime = LocalDateTime.now(),
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -48,8 +49,6 @@ data class Todo (
         title?.let { this.title = it }
         description?.let { this.description = it }
         completed?.let { this.completed = it }
-
-        this.updateDate = LocalDateTime.now()
 
         registerEvent(TodoUpdateEvent(this))
     }

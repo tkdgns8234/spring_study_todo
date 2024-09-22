@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 /**
  * @RestContoller 예외 발생 시, 공통 처리
  *
- * Spring 에서 지원하는 예외클래스는 별도 처리하지 않아도 됨
  **/
 @RestControllerAdvice
 class GlobalExceptionHandler {
